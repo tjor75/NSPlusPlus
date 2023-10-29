@@ -129,7 +129,7 @@ function appendDiagram(container, json) {
 	return diagram;
 }
 
-function mk() {  return new Date().getDate(); }
+// [P] function mk() {  return new Date().getDate(); }
 
 function makeDraggable(obj) {
 	obj.setAttribute("draggable", "true");
@@ -314,30 +314,18 @@ function setHPopup() {
 	})
 }
 
-function check() {
+/*function check() {
 	urlParams = new URLSearchParams(window.location.search);
 	(function (a ,b, c, d) { ((a) ? b : c)(d)}) (urlParams.get('f') == mk(), show, checkOrigin, urlParams);
-}
+}*/
 
 function ce(e) { clearAllChilds(document.body); alert(e); }
-
-function show() { document.body.style.display=""; window.resizeBy(0,0); }
-
-function checkOrigin(up) {
-	function a(r) { return r.indexOf("aulavirtual.instituto.ort.edu.ar") > -1 || r.indexOf("ort.edu.ar:50080") > -1 }
-	function d(u) { try { return u.indexOf("ort.edu.ar") > -1 } catch { return false } }
-	function c(x) { return x.get('usuario') && x.get('curso') }
-	function b(y) { return y.get("mode") == 1 }
-	if (!(a(document.referrer) || d(navigator.userAgent)) || !(b(up) || c(up))) {
-		throw atob("RXN0ZSBlZGl0b3IgZXMgc29sbyBhY2Nlc2libGUgZGVzZGUgZWwgQXVsYSBWaXJ0dWFsIGRlbCBJbnN0aXR1dG8gT1JU");
-	}
-	show();
-}
 
 function init() {
 	try {
 		prep();
-		check();
+		//check();
+		urlParams = new URLSearchParams(window.location.search);
 		setEvent(window, "load", reSize);
 		setEvent(window, "resize", reSize);
 		if (!urlParams.get("mode")) setEvent(window, "beforeunload", handleClose);
