@@ -80,6 +80,11 @@ function handleNewDiagram(e) {
 	resizeInputs();
 	drawCorners();
 }
+function handleNewProject(e) {
+	project = new NSPProject(par());
+	updateDiagram();
+	addDiagram(diagramContainer.actualDiagram);
+}
 function downDiagramHandler(e) {
 	var idx = indexOfChild(diagramsMenu.getContainerFromControlButton(this));
 	project.moveDiagramDown(idx);
