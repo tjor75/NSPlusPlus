@@ -14,7 +14,7 @@ var buttonsDiagramTemplates = [{
 	"type": "tipo",
 	"name": "nombre"
 }, {
-	"type": "final tipo",
+	"type": "const tipo",
 	"name": "NOMBRE",
 	"value": "expresión"
 }, {

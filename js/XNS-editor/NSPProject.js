@@ -1,6 +1,6 @@
 function NSPProject(data) {
 	var _self = this;
-	var _DEFAULT_NAME = "Proyecto sin título";
+	var _DEFAULT_NAME = "Proyecto nuevo";
 	var _DEFAULT_AUTHOR = "Sin autor";
 	var _DEFAULT_GROUP = "Sin comisión";
 
