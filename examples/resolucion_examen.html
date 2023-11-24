@@ -3,13 +3,13 @@
 	<head>
 		<meta charset="UTF-8">
         <title>Resolucion Recuperatorio Algoritmos 1er cuatrimestre 2018</title>
-        <link rel="stylesheet" type="text/css" href="../css/XNSDiagram.css" />
-        <script type="application/javascript" src="../js/html2canvas.js"></script>
-        <script type="application/javascript" src="../js/Enumeration.js"></script>
-        <script type="application/javascript" src="../js/ClassConstructor.js"></script>
-        <script type="application/javascript" src="../js/BaseDiagram.js"></script>
-        <script type="application/javascript" src="../js/DiagramObject.js"></script>
-        <script type="application/javascript" src="../js/XNSDiagram.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/NSPDiagram.css" />
+        <script type="application/javascript" src="../js/XNS-core/html2canvas.js"></script>
+        <script type="application/javascript" src="../js/XNS-core/Enumeration.js"></script>
+        <script type="application/javascript" src="../js/XNS-core/ClassConstructor.js"></script>
+        <script type="application/javascript" src="../js/XNS-core/BaseDiagram.js"></script>
+        <script type="application/javascript" src="../js/XNS-core/DiagramObject.js"></script>
+        <script type="application/javascript" src="../js/XNS-core/XNSDiagramMaker.js"></script>
         <style>
         #diagramContainer {
             display: block;
@@ -103,7 +103,7 @@
             
             var diagramBuilder, diagram;
             window.onload = function() {
-                diagramBuilder = new XNSDiagram();
+                diagramBuilder = new XNSDiagramMaker();
                 //diagramBuilder = new XNSDiagram({ "onrender": function(img) { document.body.appendChild(img); } });
                 diagram = diagramBuilder.render(document.getElementById("diagramContainer"), declaration);
             }

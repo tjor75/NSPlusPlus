@@ -1,12 +1,12 @@
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/XNSDiagram.css" />
-    <script type="application/javascript" src="js/html2canvas.js"></script>
-    <script type="application/javascript" src="js/Enumeration.js"></script>
-    <script type="application/javascript" src="js/ClassConstructor.js"></script>
-    <script type="application/javascript" src="js/BaseDiagram.js"></script>
-    <script type="application/javascript" src="js/DiagramObject.js"></script>
-    <script type="application/javascript" src="js/XNSDiagram.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/NSPDiagram.css" />
+    <script type="application/javascript" src="js/XNS-core/html2canvas.js"></script>
+    <script type="application/javascript" src="js/XNS-core/Enumeration.js"></script>
+    <script type="application/javascript" src="js/XNS-core/ClassConstructor.js"></script>
+    <script type="application/javascript" src="js/XNS-core/BaseDiagram.js"></script>
+    <script type="application/javascript" src="js/XNS-core/DiagramObject.js"></script>
+    <script type="application/javascript" src="js/XNS-core/XNSDiagramMaker.js"></script>
     <style>
         body {
             font-family: helvetica, arial, sans-serif;
@@ -67,7 +67,7 @@
         window.onload = function () {
 
             var mainbox = document.getElementById("diagramContainer");
-            var xnsd = new XNSDiagram();
+            var xnsd = new XNSDiagramMaker();
             var declaration;
 
             function insertHeader(elem, description) {

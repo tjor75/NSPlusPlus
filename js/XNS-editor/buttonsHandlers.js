@@ -81,8 +81,12 @@ function handleNewDiagram(e) {
 	drawCorners();
 }
 function handleNewProject(e) {
+	deleteDiagrams();
 	project = new NSPProject(par());
-	updateDiagram();
+	diagramContainer = new DiagramContainer();
+	diagramsMenu = new DiagramsMenu();
+	statementsMenu = new StatementsMenu();
+	PDF = new NSPPDF();
 	addDiagram(diagramContainer.actualDiagram);
 }
 function downDiagramHandler(e) {

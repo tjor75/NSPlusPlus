@@ -3,7 +3,7 @@ var importProjectBtn = document.getElementById("importProjectBtn");
 
 var exportProjectBtn = document.getElementById("exportProjectBtn");
 var exportPDFBtn = document.getElementById("exportPDFBtn");
-var exitBtn = document.getElementById("exitBtn");
+var newProjectBtn = document.getElementById("newProjectBtn");
 
 var newDiagramBtn = document.getElementById("newDiagram");
 var viewAllDiagramsBtn = document.getElementById("viewAllDiagrams");
@@ -36,7 +36,7 @@ function initButtons(prj) {
 	setEvent(buttonOpenBlocks, "click", openBlocksContainerHandler);
 	setEvent(buttonCloseBlocks, "click", closeBlocksContainerHandler);
 
-	setEvent(exitBtn, "click", handleNewProject);
+	setEvent(newProjectBtn, "click", handleNewProject);
 	
 	function setInsertButtonsEvents() {
 		var diagramButtons = document.getElementById("diagramButtons").children;
