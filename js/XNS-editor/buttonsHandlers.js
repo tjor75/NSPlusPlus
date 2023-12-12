@@ -87,7 +87,9 @@ function handleNewProject(e) {
 	diagramsMenu = new DiagramsMenu();
 	statementsMenu = new StatementsMenu();
 	PDF = new NSPPDF();
-	addDiagram(diagramContainer.actualDiagram);
+	document.getElementById("inputProjectName").value = "";
+	document.getElementsByTagName("title")[0].innerHTML = "NS Plus Plus";
+	handleNewDiagram(e);
 }
 function downDiagramHandler(e) {
 	var idx = indexOfChild(diagramsMenu.getContainerFromControlButton(this));

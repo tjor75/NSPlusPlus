@@ -1,9 +1,9 @@
 var base = {
 	"declaration": {
 		"class": "LaClase",
-		"modifiers": "public",
+		"modifiers": "public static",
 		"type": "void",
-		"name": "elMétodo",
+		"name": "elMetodo",
 		"arguments": []
 	},
 	"localVars": [],

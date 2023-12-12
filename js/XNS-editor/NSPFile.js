@@ -54,7 +54,7 @@ function toWrite() {
 }
 
 function headWithStyles() {
-	var head = '<head><title>' + project.name + '-NS+</title>';
+	var head = '<!DOCTYPE html><head><title>' + project.name + ' - NS++</title>';
 	var styles = window.document.styleSheets;
 	for (let index = 0; index < styles.length; index++) {
 		head += '<link rel="stylesheet" type="text/css" href="' + styles[index].href + '" />'
