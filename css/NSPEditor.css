@@ -123,6 +123,7 @@ html {
 #diagramsContainer {
 	width: 15%;
 	z-index: 3;
+	border-right: solid 1px #3f51b5;
 }
 
 #menuContainer {
@@ -130,6 +131,7 @@ html {
 	right: 0;
 	overflow-y: auto;
 	/* display: none; */
+	border-left: solid 1px #3f51b5;
 }
 
 #sectionDiagram {
