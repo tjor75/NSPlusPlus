@@ -6,11 +6,11 @@ function handleClickButtonDiagram(ev) {
 	makeDraggable(obj);
 	switch (idx) {
 		case 0:
+			diagramContainer.localVars.insertBefore(obj, diagramContainer.localVars.firstChild);
+			break;
+		case 3:
 			obj.innerHTML = (diagramContainer.methodParameters.hasChildNodes() ? " , " : "") + obj.innerHTML;
 			diagramContainer.methodParameters.appendChild(obj);
-			break;
-		case 1:
-			diagramContainer.localVars.insertBefore(obj, diagramContainer.localVars.firstChild);
 			break;
 		default:
 			diagramContainer.localVars.appendChild(obj);

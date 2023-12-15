@@ -39,57 +39,57 @@
 				<i class="fa fa-pencil-square-o"></i> <i class="fa fa-caret-down"></i>
 			</button>
 			<div id="diagramButtons" class="w3-dropdown-content w3-light-grey w3-card-4 w3-mobile">
-				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newParameter">Par&aacute;metro</a>
 				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newInitializedConstant">Constante</a>
 				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newVariable">Variable</a>
 				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newInitializedVariable">Variable
 					inicializada</a>
+				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newParameter">Par&aacute;metro</a>
 			</div>
 		</div>
-		<div class="w3-dropdown-hover w3-right w3-bar-item w3-indigo w3-mobile" style="position: absolute; top: 0; right: 0;">
-			<button class="w3-btn w3-light-blue w3-hover-white w3-text-dark-gray w3-large">
-				<i class="fa fa-gear"></i> <i class="fa fa-caret-down"></i>
+		<div class="w3-bar-item w3-right w3-indigo w3-mobile" style="position: absolute; top: 0; right: 0;">
+			<button class="w3-btn w3-light-blue w3-hover-blue w3-text-dark-gray w3-xlarge"
+				onclick="document.getElementById('settings').style.display='block'">
+				<i class="fa fa-gear"></i>
 			</button>
-			<div class="w3-dropdown-content w3-light-grey w3-bar-block w3-mobile">
-				<div class="w3-bar-item switcher-block">
-					<span class="w3-bar-item">Colorear </span>
-					<label class="switcher-button">
-						<input type="checkbox" id="checkColors" checked>
-						<span class="slider round"></span>
-					</label>
-				</div>
-			</div>
 		</div>
 	</header>
 
 	<button id="buttonOpenDiagrams" class="w3-btn w3-indigo panelButton">Diagramas<i
 			class="fa fa-arrow-down"></i></button>
 	<button id="buttonOpenBlocks" class="w3-btn w3-indigo panelButton"><i class="fa fa-arrow-down"></i>Bloques</button>
-
+	
 	<div id="main">
 		<div class="w3-sidebar w3-animate-left invisible" id="diagramsContainer">
+			<button id="buttonCloseDiagrams" class="w3-btn w3-indigo closeButton">
+				<i class="fa fa-arrow-left"></i>
+			</button>
+
 			<div class="controlButtons w3-center w3-padding">
 				<div class="w3-bar">
 					<button id="newDiagram" class="w3-btn w3-white w3-large w3-text-teal">
 						<i class="fa fa-lg fa-plus-circle"></i>
 					</button>
-					<button id="viewAllDiagrams" class="hidden w3-btn w3-white w3-large w3-text-dark-gray">
+					<button id="viewAllDiagrams" class="w3-btn w3-white w3-large w3-text-dark-gray">
 						<i class="fa fa-lg fa-eye"></i>
 					</button>
-					<button id="buttonCloseDiagrams" class="w3-btn w3-white w3-large w3-text-indigo">
+					<!--<button id="buttonCloseDiagrams" class="w3-btn w3-white w3-large w3-text-indigo">
 						<i class="fa fa-lg fa-arrow-left"></i>
-					</button>
+					</button>-->
 				</div>
 			</div>
 			<div id="diagramsItemsContainer"></div>
 		</div>
 
 		<div id="menuContainer" class="w3-sidebar w3-animate-right invisible">
+			<button id="buttonCloseBlocks" class="w3-btn w3-indigo closeButton">
+				<i class="fa fa-arrow-right"></i>
+			</button>
+
 			<div class="controlButtons w3-center w3-padding">
 				<div class="w3-bar">
-					<button id="buttonCloseBlocks" class="w3-btn w3-white w3-large w3-text-indigo">
+					<!--<button id="buttonCloseBlocks" class="w3-btn w3-white w3-large w3-text-indigo">
 						<i class="fa fa-lg fa-arrow-right"></i>
-					</button>
+					</button>-->
 				</div>
 			</div>
 		</div>
@@ -111,11 +111,34 @@
 		<div class="message w3-col s4 w3-center" id="historialBtn">Para todos.</div>
 		<div class="professor w3-col s4 w3-center">
 			<i class="fa fa-sm fa-github"></i>
-			<a href="http://www.github.com/CharlyCimino">Prof. Carlos E. Cimino</a>
+			<a onclick="document.getElementById('id01').style.display='block'" href="#">Prof. Carlos E. Cimino</a>
 		</div>
-		<!-- <div id="historialBtn" class="fa fa-book historial"></div> -->
-		<div id="hist-popup" class="w3-indigo hidden"></div>
+		<div id="historialBtn" class="fa fa-book historial"></div>
+		<div id="hist-popup" class="w3-indigo hidden">
+			<iframe src="https://tjor75.github.io/NSPlusPlus/" width="300px" height="500px"></iframe>
+		</div>
 	</footer>
+
+
+	<div id="settings" class="w3-modal">
+		<div class="w3-modal-content">
+		<div class="w3-container">
+			<span onclick="document.getElementById('settings').style.display='none'"
+				class="w3-button w3-display-topright">&times;</span>
+			<h2>Ajustes</h2>
+			<h3>Dise&ntilde;o</h3>
+			<div class="w3-section">
+			<div class="switcher-block">
+				<span class="w3-bar-item">Colorear </span>
+				<label class="switcher-button">
+					<input type="checkbox" id="checkColors" checked>
+					<span class="slider round"></span>
+				</label>
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
 
 	<div id="projectPrint" class="w3-container invisible">
 		<div class="PDFHeader">

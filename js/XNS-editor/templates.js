@@ -3,7 +3,7 @@ var base = {
 		"class": "LaClase",
 		"modifiers": "public static",
 		"type": "void",
-		"name": "elMetodo",
+		"name": "elMétodo",
 		"arguments": []
 	},
 	"localVars": [],
@@ -11,9 +11,6 @@ var base = {
 };
 
 var buttonsDiagramTemplates = [{
-	"type": "tipo",
-	"name": "nombre"
-}, {
 	"type": "const tipo",
 	"name": "NOMBRE",
 	"value": "expresión"
@@ -24,6 +21,9 @@ var buttonsDiagramTemplates = [{
 	"type": "tipo",
 	"name": "nombre",
 	"value": "expresión"
+}, {
+	"type": "tipo",
+	"name": "nombre"
 }];
 
 var newDeclaration = {

@@ -48,11 +48,11 @@ html {
 	font-size: 18px;
 }
 
-#footer .professor> i {
+#footer .professor > i {
 	font-size: 16px;
 }
 
-#footer .professor> a {
+#footer .professor > a {
 	font-size: 14px;
 }
 
@@ -118,6 +118,24 @@ html {
 
 .panelButton {
 	width: 130px;
+}
+
+#buttonCloseDiagrams {
+	position: relative;
+	top: 1vh;
+	border-radius: 20px 0 0 20px;
+	float: right;
+}
+
+#buttonCloseBlocks {
+	position: relative;
+	top: 1vh;
+	border-radius: 0 20px 20px 0;
+	float: left;
+}
+
+.closeButton {
+	width: 10px;
 }
 
 #diagramsContainer {
@@ -201,7 +219,7 @@ html {
 	padding-left: 1em;
 }
 .disabled {
-	opacity: .5;
+	opacity: 0.5;
 	cursor: auto;
 }
 .evalrow {
