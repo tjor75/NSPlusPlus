@@ -7,14 +7,20 @@ var PDF;
 var urlParams;
 var trash = document.getElementById("trash");
 
+var mode;
+var template;
+var id;
+
 function drag(e) {
+	console.log(e);
+
 	if (this.template) {
-		e.dataTransfer.setData("mode", "copy");
+		mode = "copy";
 	} else {
-		e.dataTransfer.setData("mode", "move");
+		mode = "move";
 	}
-	e.dataTransfer.setData("template", this.template);
-	e.dataTransfer.setData("id", e.target.id);
+	template = this.template;
+	id = e.target.id;
 	setTimeout(() => {
 		applyClassInNode(false, "invisible", trash);
 		expandEmptys(true);
@@ -22,15 +28,12 @@ function drag(e) {
 }
 
 function drop(ev) {
+	var statement, deleteEmpty = true;
+
 	ev.preventDefault();
-	if (ev.dataTransfer.files.length > 0) {
+	if (typeof ev.dataTransfer !== "undefined" && ev.dataTransfer.files.length > 0) {
 		importDiagram(ev.dataTransfer.files[0]);
 	} else {
-		var mode = ev.dataTransfer.getData("mode");
-		var template = ev.dataTransfer.getData("template");
-		var id = ev.dataTransfer.getData("id");
-		var statement;
-		var deleteEmpty = true;
 		if (mode == "copy") {
 			statement = renderStatement(JSON.parse(template));
 			empty = newEmptyBlock();
@@ -133,8 +136,12 @@ function appendDiagram(container, json) {
 
 function makeDraggable(obj) {
 	obj.setAttribute("draggable", "true");
+
 	setEvent(obj, "dragstart", drag);
 	setEvent(obj, "dragend", handleDragEnd);
+
+	setEvent(obj, "touchstart", drag);
+	setEvent(obj, "touchend", handleDragEnd);
 }
 
 function allowDrop(ev) {
@@ -148,6 +155,7 @@ function allowDrop(ev) {
 }
 
 function setTrashEvents() {
+	//setEvent(document.body, "touchstart", () => console.log("test"));
 	setEvent(trash, "dragenter", handleDragOverInTrash);
 	setEvent(trash, "dragleave", handleDragLeaveInTrash);
 	setEvent(trash, "drop", drop);
@@ -194,7 +202,7 @@ function addDiagram(diagram) {
 
 function deleteDiagrams() {
 	var x = document.getElementById("diagramsItemsContainer").children;
-	for(y=x.length-1;y>=0;y--) {
+	for (y = x.length - 1; y >= 0; y--) {
 		var diagram = project.getDiagram(y);
 		diagramContainer.setDiagram(diagram);
 		diagramsMenu.setActiveDiagram(diagram);
@@ -257,11 +265,11 @@ function handleChangeDiagramName(e) {
 }
 
 function prep() {
-	_a = (function(w,x){var z={};for(y in x){z[y]=w[x[y]]};return z})(this, {"emchange":"ub","refresh":"re"});
+	_a = ((w,x) => {var z={};for(y in x){z[y]=w[x[y]]};return z})(this, {"emchange":"ub","refresh":"re"});
 }
 
 function ver() {
-	return (function(x){var z={};for(y in x){w=urlParams.get(x[y]);if(w)z[y]=w};return z})({"usr":"usuario","com":"curso","uid":"idusr","evs":"k","eve":"k2","tea":"f"});
+	return ((x) => {var z={};for(y in x){w=urlParams.get(x[y]);if(w)z[y]=w};return z})({"usr":"usuario","com":"curso","uid":"idusr","evs":"k","eve":"k2","tea":"f"});
 }
 
 function eventProc(o) {
@@ -325,6 +333,7 @@ function init() {
 	try {
 		prep();
 		//check();
+		document.getElementById("javascriptNeeded").classList.remove("invisible");
 		urlParams = new URLSearchParams(window.location.search);
 		setEvent(window, "load", reSize);
 		setEvent(window, "resize", reSize);
@@ -335,7 +344,7 @@ function init() {
 		diagramsMenu = new DiagramsMenu();
 		statementsMenu = new StatementsMenu();
 		PDF = new NSPPDF();
-		setEvent(document.getElementById("inputProjectName"), "change", function() { document.title = project.name = this.value; });
+		setEvent(document.getElementById("inputProjectName"), "change", () => { document.title = project.name = this.value; });
 		initButtons(project);
 		addDiagram(diagramContainer.actualDiagram);
 		resizeInputs();

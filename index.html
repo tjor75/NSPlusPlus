@@ -2,6 +2,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>NS Plus Plus</title>
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -18,61 +19,92 @@
 </head>
 
 <body>
-	<header id="header" class="w3-bar w3-indigo w3-top">
-		<img src="img/nsplus-logo-white.png" class="w3-image w3-bar-item" id="nsplusLogo" alt="NSPlusLogo" />
-		<input id="inputProjectName" type="text" class="w3-bar-item w3-light-grey w3-input"
-			placeholder="Proyecto nuevo">
-		<div class="w3-bar-item">
-			<button type="button" id="newProjectBtn" class="w3-btn w3-text-dark-gray w3-light-grey w3-xlarge"><i
-				class="fa fa-file-o"></i></button>
-			<button type="button" id="importProjectBtn" class="w3-btn w3-text-dark-gray w3-light-grey w3-xlarge"><i
-					class="fa fa-folder-open-o"></i></button>
-			<button type="button" id="exportProjectBtn" class="w3-btn w3-text-dark-gray w3-light-grey w3-xlarge"><i
-					class="fa fa-floppy-o"></i></button>
-			<button type="button" id="exportPDFBtn" class="w3-btn w3-text-pink w3-light-grey w3-xlarge"><i
-					class="fa fa-file-pdf-o"></i></button>
+	<noscript>Esta aplicaci&oacute;n necesita Javascript para funcionar.</noscript>
 
-			<input id="fileInput" type="file" accept=".nsplus" name="name" class="invisible" />
-		</div>
-		<div class="w3-dropdown-hover w3-bar-item w3-indigo w3-mobile">
-			<button class="w3-btn w3-light-grey w3-hover-white w3-text-dark-gray w3-large">
-				<i class="fa fa-pencil-square-o"></i> <i class="fa fa-caret-down"></i>
-			</button>
-			<div id="diagramButtons" class="w3-dropdown-content w3-light-grey w3-card-4 w3-mobile">
-				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newInitializedConstant">Constante</a>
-				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newVariable">Variable</a>
-				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newInitializedVariable">Variable
-					inicializada</a>
-				<a type="button" class="w3-btn w3-light-grey w3-hover-indigo" id="newParameter">Par&aacute;metro</a>
+	<div id="javascriptNeeded" class="invisible">
+	<header id="header" class="w3-bar w3-indigo w3-top" style="display:inline-flex">
+		<img src="img/nsplus-logo-white.png" class="w3-image w3-bar-item" id="nppLogo" alt="NSPlusPlusLogo" title="NS Plus Plus" />
+
+		<div>
+			<input id="inputProjectName" type="text" class="w3-bar-item w3-light-grey w3-input"
+				placeholder="Proyecto nuevo">
+
+			<div class="w3-bar w3-text-light-grey w3-indigo w3-small" id="actionMenu">
+				<div class="w3-dropdown-hover">
+					<button class="w3-button">Proyecto</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<button type="button" id="newProjectBtn"
+							class="w3-button w3-bar-item w3-text-dark-gray w3-light-grey">
+							<i class="fa fa-file-o"></i> Nuevo
+						</button>
+						<button type="button" id="importProjectBtn"
+							class="w3-button w3-bar-item w3-text-dark-gray w3-light-grey">
+							<i class="fa fa-folder-open-o"></i> Abrir
+						</button>
+						<button type="button" id="exportProjectBtn"
+							class="w3-button w3-bar-item w3-text-dark-gray w3-light-grey">
+							<i class="fa fa-floppy-o"></i> Guardar
+						</button>
+						<button type="button" id="exportPDFBtn"
+							class="w3-button w3-bar-item w3-text-pink w3-light-grey">
+							<i class="fa fa-file-pdf-o"></i> Exportar como PDF
+						</button>
+
+						<input id="fileInput" type="file" accept=".nsplus" name="name" class="invisible" />
+					</div>
+				</div>
+				<div class="w3-dropdown-hover">
+					<button class="w3-button">Vista</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<span class="w3-bar-item w3-text-dark-gray w3-light-grey">
+							<input type="checkbox" class="w3-check" id="checkColors" checked>
+							<label>Colorear</label>
+						</span>
+						<span class="w3-bar-item w3-text-dark-gray w3-light-grey">
+							<input type="checkbox" class="w3-check" id="checkDarkMode">
+							<label>Modo oscuro</label>
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="w3-bar-item w3-right w3-indigo w3-mobile" style="position: absolute; top: 0; right: 0;">
-			<button class="w3-btn w3-light-blue w3-hover-blue w3-text-dark-gray w3-xlarge"
-				onclick="document.getElementById('settings').style.display='block'">
-				<i class="fa fa-gear"></i>
-			</button>
+
+		<div class="w3-right" style="position: absolute; top: 0; right: 0;">
+			<div class="w3-bar-item w3-dropdown-hover w3-indigo w3-right">
+				<button class="w3-button w3-light-grey w3-hover-white w3-text-dark-gray w3-large">
+					<i class="fa fa-pencil-square-o"></i> <i class="fa fa-caret-down"></i>
+				</button>
+				<div id="diagramButtons" class="w3-dropdown-content w3-light-grey w3-card-4 w3-border"
+					style="right: 0;">
+					<a type="button" class="w3-button w3-light-grey w3-hover-indigo" id="newInitializedConstant">Constante</a>
+					<a type="button" class="w3-button w3-light-grey w3-hover-indigo" id="newVariable">Variable</a>
+					<a type="button" class="w3-button w3-light-grey w3-hover-indigo" id="newInitializedVariable">Variable
+						inicializada</a>
+					<a type="button" class="w3-button w3-light-grey w3-hover-indigo" id="newParameter">Par&aacute;metro</a>
+				</div>
+			</div>
 		</div>
 	</header>
 
-	<button id="buttonOpenDiagrams" class="w3-btn w3-indigo panelButton">Diagramas<i
+	<button id="buttonOpenDiagrams" class="w3-button w3-indigo panelButton">Diagramas<i
 			class="fa fa-arrow-down"></i></button>
-	<button id="buttonOpenBlocks" class="w3-btn w3-indigo panelButton"><i class="fa fa-arrow-down"></i>Bloques</button>
+	<button id="buttonOpenBlocks" class="w3-button w3-indigo panelButton"><i class="fa fa-arrow-down"></i>Bloques</button>
 	
 	<div id="main">
 		<div class="w3-sidebar w3-animate-left invisible" id="diagramsContainer">
-			<button id="buttonCloseDiagrams" class="w3-btn w3-indigo closeButton">
+			<button id="buttonCloseDiagrams" class="w3-button w3-indigo closeButton">
 				<i class="fa fa-arrow-left"></i>
 			</button>
 
 			<div class="controlButtons w3-center w3-padding">
 				<div class="w3-bar">
-					<button id="newDiagram" class="w3-btn w3-white w3-large w3-text-teal">
+					<button id="newDiagram" class="w3-button w3-white w3-large w3-text-teal">
 						<i class="fa fa-lg fa-plus-circle"></i>
 					</button>
-					<button id="viewAllDiagrams" class="w3-btn w3-white w3-large w3-text-dark-gray">
+					<button id="viewAllDiagrams" class="w3-button w3-white w3-large w3-text-dark-gray">
 						<i class="fa fa-lg fa-eye"></i>
 					</button>
-					<!--<button id="buttonCloseDiagrams" class="w3-btn w3-white w3-large w3-text-indigo">
+					<!--<button id="buttonCloseDiagrams" class="w3-button w3-white w3-large w3-text-indigo">
 						<i class="fa fa-lg fa-arrow-left"></i>
 					</button>-->
 				</div>
@@ -81,13 +113,13 @@
 		</div>
 
 		<div id="menuContainer" class="w3-sidebar w3-animate-right invisible">
-			<button id="buttonCloseBlocks" class="w3-btn w3-indigo closeButton">
+			<button id="buttonCloseBlocks" class="w3-button w3-indigo closeButton">
 				<i class="fa fa-arrow-right"></i>
 			</button>
 
 			<div class="controlButtons w3-center w3-padding">
 				<div class="w3-bar">
-					<!--<button id="buttonCloseBlocks" class="w3-btn w3-white w3-large w3-text-indigo">
+					<!--<button id="buttonCloseBlocks" class="w3-button w3-white w3-large w3-text-indigo">
 						<i class="fa fa-lg fa-arrow-right"></i>
 					</button>-->
 				</div>
@@ -108,33 +140,41 @@
 			<i class="fa fa-sm fa-github"></i>
 			<a href="http://www.github.com/axxonita">Prof. C. Daniel Vázquez</a>
 		</div>
-		<div class="message w3-col s4 w3-center" id="historialBtn">Para todos.</div>
-		<div class="professor w3-col s4 w3-center">
+		<!--<div class="message w3-col s4 w3-center" id="historialBtn">Para todos.</div>-->
+		<!--<div class="professor w3-col s4 w3-center">
 			<i class="fa fa-sm fa-github"></i>
 			<a onclick="document.getElementById('id01').style.display='block'" href="#">Prof. Carlos E. Cimino</a>
+		</div>-->
+		<div class="w3-col s4 w3-right-align">
+			<a class="fa fa-info"
+				onclick="document.getElementById('about').style.display='block'"></a>
+			<a id="historialBtn" class="fa fa-book historial"
+				onclick="document.getElementById('id01').style.display='block'"></a>
 		</div>
-		<div id="historialBtn" class="fa fa-book historial"></div>
 		<div id="hist-popup" class="w3-indigo hidden">
 			<iframe src="https://tjor75.github.io/NSPlusPlus/" width="300px" height="500px"></iframe>
 		</div>
 	</footer>
+	</div>
 
 
-	<div id="settings" class="w3-modal">
+	<div id="about" class="w3-modal">
 		<div class="w3-modal-content">
 		<div class="w3-container">
-			<span onclick="document.getElementById('settings').style.display='none'"
+			<span onclick="document.getElementById('about').style.display='none';"
 				class="w3-button w3-display-topright">&times;</span>
-			<h2>Ajustes</h2>
-			<h3>Dise&ntilde;o</h3>
 			<div class="w3-section">
-			<div class="switcher-block">
-				<span class="w3-bar-item">Colorear </span>
-				<label class="switcher-button">
-					<input type="checkbox" id="checkColors" checked>
-					<span class="slider round"></span>
-				</label>
+				<img src="img/nsplus-logo-indigo.png" width="200vw" height="auto">
 			</div>
+			<hr>
+			<div class="w3-section">
+				<span class="message">Hecho con &hearts; para todos desde Argentina.</span>
+				<br>
+				<span class="w3-small">
+					&copy;2018 axxonita &copy;2023-2024 Lucas Tjor (tjor75)
+					<br>
+				NS Plus Plus (NS++) es un fork de <a href="https://github.com/CharlyCimino/XNSDiagrams">NS Plus</a> por el <a href="https://github.com/axxonita">Prof. C. Daniel V&aacute;zquez</a> y el <a href="https://github.com/CharlyCimino">Prof. Charly E. Cimino</a>.
+				</span>
 			</div>
 		</div>
 		</div>
@@ -142,7 +182,8 @@
 
 	<div id="projectPrint" class="w3-container invisible">
 		<div class="PDFHeader">
-			<img src="img/nsplus-logo-indigo.png" class="w3-image w3-bar-item" id="nsplusLogoPDF" alt="NSPlusLogo" />
+			<!-- <img src="img/nsplus-logo-indigo.png" class="w3-image w3-bar-item" id="institutionLogoPDF" alt="NSPlusPlusLogo" title="NS Plus Plus" /> -->
+			<img src="img/nsplus-logo-indigo.png" class="w3-image w3-bar-item" id="nppLogoPDF" alt="NSPlusPlusLogo" title="NS Plus Plus" />
 			<h1 id="PDFTitle" class="w3-large w3-center"></h1>
 			<h2 id="PDFSubTitle" class="w3-small w3-center">
 				<span id="PDFAutor"></span> |

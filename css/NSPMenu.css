@@ -54,3 +54,15 @@
     display: table-cell;
 	min-width: 20pt;
 }
+
+
+
+@media (max-width: 600px) {
+	#menuContainer {
+		position: absolute;
+		top: 70px;
+		bottom: 0;
+		width: 35vw;
+		height: 100vh;
+	}
+}

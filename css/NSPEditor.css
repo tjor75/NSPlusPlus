@@ -2,9 +2,18 @@ html {
 	overflow-y: hidden;
 }
 
-#nsplusLogo {
+#header {
+	z-index: 4;
+}
+
+#nppLogo {
 	width: 100%;
 	max-width: 112px;
+}
+
+#header #actionMenu .w3-dropdown-hover:first-child {
+	background-color: unset;
+	color: unset;
 }
 
 #trash {
@@ -42,7 +51,7 @@ html {
 	border: none;
 }
 
-#footer .message {
+#footer .message, .message {
 	font-family: 'Dancing Script', Times New Roman, serif;
 	letter-spacing: 0.5pt;
 	font-size: 18px;
@@ -57,8 +66,8 @@ html {
 }
 
 #footer, #header {
-	display : flex;
-	align-items : center;
+	display: flex;
+	align-items: center;
 	z-index: 3;
 }
 
@@ -224,4 +233,16 @@ html {
 }
 .evalrow {
 	background-color: #b25050;
+}
+
+
+
+@media (max-width: 600px) {
+	#diagramsContainer {
+		position: absolute;
+		top: 70px;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+	}
 }
