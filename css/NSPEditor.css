@@ -52,7 +52,7 @@ html {
 }
 
 #footer .message, .message {
-	font-family: 'Dancing Script', Times New Roman, serif;
+	font-family: "Dancing Script", Times New Roman, serif;
 	letter-spacing: 0.5pt;
 	font-size: 18px;
 }
@@ -190,6 +190,14 @@ html {
 #diagramsContainer>.diagram-item>p:last-child {
 	text-indent: 10%;
 } */
+
+#newCustomStyles {
+	font-family: "Consolas", monospace;
+	font-size: 11pt;
+	width: 100%;
+	height: 350px;
+	border: dashed 1px #818181;
+}
 
 #modalToSave {
 	display: block;

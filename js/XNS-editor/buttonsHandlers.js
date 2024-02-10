@@ -27,9 +27,6 @@ function handleCheckColors(e) {
 
 function handleCheckDarkMode(e) {
 	var body = document.body;
-	var link = document.getElementById("css/NSPDarkMode.css");
-
-	link.setAttribute("href", (e.target.checked ? link.id : ""));
 	
 	if (e.target.checked) {
 		body.classList.remove("light");
