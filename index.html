@@ -16,9 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="css/animations.css" />
 	<link rel="stylesheet" type="text/css" href="css/switch-button.css" />
 	<link rel="stylesheet" type="text/css" href="css/NSPColors.css" id="css/NSPColors.css" />
+	<link rel="stylesheet" type="text/css" href="css/NSPDarkMode.css" id="css/NSPDarkMode.css" />
+	<link rel="stylesheet" type="text/css" href="" id="customStyles" />
 </head>
 
-<body>
+<body class="light">
 	<noscript>Esta aplicaci&oacute;n necesita Javascript para funcionar.</noscript>
 
 	<div id="javascriptNeeded" class="invisible">
@@ -64,6 +66,21 @@
 							<input type="checkbox" class="w3-check" id="checkDarkMode">
 							<label>Modo oscuro</label>
 						</span>
+						<button type="button"
+							class="w3-button w3-bar-item w3-text-gray w3-light-grey"
+							onclick="document.getElementById('editCustomStyles').style.display='block'">
+							<i class="fa fa-css3"></i> Estilos personalizados
+						</button>
+					</div>
+				</div>
+				<div class="w3-dropdown-hover">
+					<button class="w3-button">Ayuda</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<button type="button"
+							class="w3-button w3-bar-item w3-text-gray w3-light-grey"
+							onclick="document.getElementById('about').style.display='block'">
+							<i class="fa fa-info"></i> Acerca de
+						</button>
 					</div>
 				</div>
 			</div>
@@ -129,9 +146,7 @@
 		<i id="trash" droppable="true" class="invisible fa fa-sm fa-trash w3-text-indigo"></i>
 		<section id="sectionDiagram"
 			class="w3-animate-zoom w3-container w3-padding-16 initial-margin-left initial-margin-right">
-			<div id="actualDiagram">
-
-			</div>
+			<div id="actualDiagram"></div>
 		</section>
 	</div>
 
@@ -146,35 +161,42 @@
 			<a onclick="document.getElementById('id01').style.display='block'" href="#">Prof. Carlos E. Cimino</a>
 		</div>-->
 		<div class="w3-col s4 w3-right-align">
-			<a class="fa fa-info"
-				onclick="document.getElementById('about').style.display='block'"></a>
 			<a id="historialBtn" class="fa fa-book historial"
 				onclick="document.getElementById('id01').style.display='block'"></a>
 		</div>
 		<div id="hist-popup" class="w3-indigo hidden">
-			<iframe src="https://tjor75.github.io/NSPlusPlus/" width="300px" height="500px"></iframe>
+			<iframe src="https://raw.githubusercontent.com/tjor75/NSPlusPlus/master/CHANGELOG" width="300px" height="500px"></iframe>
 		</div>
 	</footer>
 	</div>
 
 
-	<div id="about" class="w3-modal">
+	<div id="editCustomStyles" class="w3-modal">
+		<div class="w3-modal-content w3-container">
+			<span onclick="document.getElementById('editCustomStyles').style.display='none';"
+				class="w3-button w3-display-topright">&times;</span>
+			<h2>Editar estilos personalizados</h2>
+			<textarea style="width: 100%; height: 350px;" id="newCustomStyles"></textarea>
+			<br>
+			<button id="applyNewCustomStyles" class="w3-button w3-light-grey w3-hover-indigo">Aplicar</button>
+		</div>
+	</div>
+
+	<div id="about" class="w3-modal" style="text-align: center;">
 		<div class="w3-modal-content">
 		<div class="w3-container">
 			<span onclick="document.getElementById('about').style.display='none';"
 				class="w3-button w3-display-topright">&times;</span>
 			<div class="w3-section">
 				<img src="img/nsplus-logo-indigo.png" width="200vw" height="auto">
+				<br>
+				<span class="message" style="font-size: 24px;">Hecho con &hearts; para todos desde Argentina.</span>
 			</div>
 			<hr>
-			<div class="w3-section">
-				<span class="message">Hecho con &hearts; para todos desde Argentina.</span>
+			<div class="w3-section w3-small">
+				&copy;2018 axxonita &copy;2023-2024 Lucas Tjor (tjor75)
 				<br>
-				<span class="w3-small">
-					&copy;2018 axxonita &copy;2023-2024 Lucas Tjor (tjor75)
-					<br>
-				NS Plus Plus (NS++) es un fork de <a href="https://github.com/CharlyCimino/XNSDiagrams">NS Plus</a> por el <a href="https://github.com/axxonita">Prof. C. Daniel V&aacute;zquez</a> y el <a href="https://github.com/CharlyCimino">Prof. Charly E. Cimino</a>.
-				</span>
+				NS Plus Plus (NS++) es un fork de <a href="https://github.com/CharlyCimino/XNSDiagrams">NS Plus</a>/XNSDiagrams por el <a href="https://github.com/axxonita">Prof. C. Daniel V&aacute;zquez</a> y el <a href="https://github.com/CharlyCimino">Prof. Charly E. Cimino</a> (<a href="https://www.ort.edu.ar/">ORT Argentina</a>).
 			</div>
 		</div>
 		</div>

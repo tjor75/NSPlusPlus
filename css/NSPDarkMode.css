@@ -1,0 +1,29 @@
+.dark body,
+.dark .w3-sidebar,
+.dark .for-statement .statements,
+.dark .while-statement>.container>.statements,
+.dark .dowhile-statement>.container>.statements {
+	background-color: #222;
+}
+
+.dark .w3-white,
+.dark .w3-hover-white:hover {
+	background-color: #000 !important;
+}
+
+.dark .w3-sidebar .w3-bar {
+	background-color: #000;
+}
+
+.dark .w3-sidebar .w3-section {
+	color: #fff;
+	background-color: #000;
+}
+
+.dark .method-declaration .input-for-statement {
+	color: white;
+}
+
+.dark .Nassi-Shneiderman {
+	color: #6e8d9b;
+}

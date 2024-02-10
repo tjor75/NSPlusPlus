@@ -40,10 +40,13 @@ function makeCssArray() {
 }
 
 function exportPDF(simpleFlag) {
+	var printWindow;
+
 	updateDiagram();
 	project.updateTime();
 	PDF.setProject(project, simpleFlag);
-	var printWindow = window.open();
+
+	printWindow = window.open();
 	printWindow.document.write(toWrite());
 }
 

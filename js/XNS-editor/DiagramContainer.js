@@ -108,6 +108,37 @@ function DiagramContainer() {
 		return document.querySelector("#actualDiagram .method-name>.input-for-statement");
 	}
 	this.setDiagramEvents = function () {
+		var isOverInBlock = false;
+
+		setEvent(document.body, "touchmove", (ev) => {
+			var containerSimEvent = { origin: this.container };
+
+			if (mouseInsideElement(ev, this.container)) {
+				handleDragOverInBlock(containerSimEvent);
+				isOverInBlock = true;
+			} else if (isOverInBlock) {
+				handleDragLeaveInBlock(containerSimEvent);
+				isOverInBlock = false;
+			}
+		});
+
+		setEvent(document.body, "touchend", (ev) => {
+			var containerSimEvent = {
+				preventDefault: () => ev.preventDefault(),
+				origin: this.container,
+				target: this.container
+			};
+
+			if (mouseInsideElement(ev, this.container)) {
+				allowDrop(containerSimEvent);
+				isOverInBlock = true;
+			} else if (isOverInBlock) {
+				drop(containerSimEvent);
+				isOverInBlock = false;
+			}
+		});
+		//setEvent(this.container, "touchenter", handleDragOverInBlock);
+
 		setEvent(this.container, "dragenter", handleDragOverInBlock);
 		setEvent(this.container, "dragleave", handleDragLeaveInBlock);
 		setEvent(this.container, "drop", drop);

@@ -73,3 +73,11 @@ function swapInNode(node, idx1, idx2) {
 function insertAfter(newNode, referenceNode) {
 	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
+
+function mouseInsideElement(ev, targetEl) {
+	var rect = targetEl.getBoundingClientRect();
+	return ev.clientX >= rect.left
+		&& ev.clientX <= rect.width + rect.left
+		&& ev.clientY >= rect.top
+		&& ev.clientY <= rect.height + rect.top;
+}

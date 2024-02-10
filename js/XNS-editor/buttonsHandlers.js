@@ -25,6 +25,21 @@ function handleCheckColors(e) {
 	link.setAttribute("href", (e.target.checked ? link.id : ""));
 }
 
+function handleCheckDarkMode(e) {
+	var body = document.body;
+	var link = document.getElementById("css/NSPDarkMode.css");
+
+	link.setAttribute("href", (e.target.checked ? link.id : ""));
+	
+	if (e.target.checked) {
+		body.classList.remove("light");
+		body.classList.add("dark");
+	} else {
+		body.classList.remove("dark");
+		body.classList.add("light");
+	}
+}
+
 function handleCheckObjects(e) {
 	classDec = document.getElementById("xnsd-class-declaration-1");
 	modifiers = document.getElementById("xnsd-method-modifiers-4");
@@ -39,7 +54,7 @@ function handleCheckObjects(e) {
 }
 
 function handleAllViewDiagrams(e) {
-	alert("Falta implementar ver todos los diagramas");
+	alert("Falta implementar ver todos los diagramas ( ͡° ͜ʖ ͡°)");
 }
 
 function handleClickInDiagramItem(e) {
@@ -54,14 +69,23 @@ function handleClickInDiagramItem(e) {
 function handleAddCaseSwitch(e) {
 	var targetCase = e.target.parentNode.parentNode.parentNode;
 	var newCase = diagramMaker["switch-case"](switchCaseTemplate);
+
 	diagramContainer.appendButtonsInCase(newCase);
 	targetCase.parentNode.insertBefore(newCase, targetCase);
 	resizeInputs();
 }
 
 function handleRemoveCaseSwitch(e) {
+	var allSwitches = e.target.parentNode.parentNode.parentNode.parentNode;
+	var switchesCount = allSwitches.childElementCount;
 	var targetCase = e.target.parentNode.parentNode.parentNode;
-	targetCase.remove();
+
+	console.log(allSwitches);
+
+	if (switchesCount > 1)
+		targetCase.remove();
+	else
+		alert("Los switches requieren por lo menos 1 case.");
 }
 
 function handleDragOverInTrash(ev) {
@@ -112,6 +136,13 @@ function deleteDiagramHandler(e) {
 	if (confirm('¿Borrar diagrama?')) {
 		deleteDiagram(diagramsMenu.getContainerFromControlButton(this));
 	};
+}
+
+function handleApplyNewCustomStyles() {
+	const newCustomStyles = document.getElementById("newCustomStyles");
+
+	localStorage.setItem("customStyles", newCustomStyles.value);
+	loadCustomStyles();
 }
 
 function openBlocksContainerHandler(e) {

@@ -12,13 +12,10 @@ var template;
 var id;
 
 function drag(e) {
-	console.log(e);
-
-	if (this.template) {
+	if (this.template)
 		mode = "copy";
-	} else {
+	else
 		mode = "move";
-	}
 	template = this.template;
 	id = e.target.id;
 	setTimeout(() => {
@@ -38,19 +35,18 @@ function drop(ev) {
 			statement = renderStatement(JSON.parse(template));
 			empty = newEmptyBlock();
 			deleteEmpty = false;
-			if (statement.getAttribute("type") == "switch") {
+			if (statement.getAttribute("type") == "switch")
 				diagramContainer.makeButtonAddInSwitch(statement);
-			}
 		} else {
 			statement = document.getElementById(id);
 			if (statement.className.includes("declaration")) {
 				deleteEmpty = false;
-				if (statement.className == "parameter-declaration" && !statement.innerHTML.includes(" , ") && diagramContainer.methodParameters.children.length > 1) {
+				if (statement.className == "parameter-declaration" && !statement.innerHTML.includes(" , ") && diagramContainer.methodParameters.children.length > 1)
 					diagramContainer.methodParameters.children[1].innerHTML = diagramContainer.methodParameters.children[1].innerHTML.substring(" , ".length);
-				}
 			}
 			empty = statement.nextSibling;
 		}
+
 		if (ev.target == trash) {
 			deleteStatement(statement, deleteEmpty);
 			handleDragLeaveInTrash(ev);
@@ -62,6 +58,7 @@ function drop(ev) {
 				collapseEmptys();
 			}
 		}
+
 		resizeInputs();
 		handleInputs();
 		drawCorners();
@@ -69,15 +66,13 @@ function drop(ev) {
 }
 
 function handleDragOverInBlock(ev) {
-	if (ev.target.classList.contains("empty")) {
+	if (ev.target.classList.contains("empty"))
 		toggleClass(ev.target, "empty-hover");
-	}
 }
 
 function handleDragLeaveInBlock(ev) {
-	if (ev.target.classList.contains("empty")) {
+	if (ev.target.classList.contains("empty"))
 		toggleClass(ev.target, "empty-hover");
-	}
 }
 
 function handleDragEnd(e) {
@@ -102,9 +97,8 @@ function expandEmptys(flag) {
 }
 
 function deleteStatement(statement, deleteEmpty) {
-	if (deleteEmpty) {
+	if (deleteEmpty)
 		statement.nextSibling.remove();
-	}
 	statement.remove();
 }
 
@@ -148,14 +142,45 @@ function allowDrop(ev) {
 	ev.preventDefault();
 	if (ev.target.getAttribute("droppable") == "true") {
 		ev.dataTransfer.dropEffect = "copy"; // drop it like it's hot
-	}
-	else {
+	} else {
 		ev.dataTransfer.dropEffect = "none"; // dropping is not allowed
 	}
 }
 
 function setTrashEvents() {
-	//setEvent(document.body, "touchstart", () => console.log("test"));
+	var isOverInTrash = false;
+
+	setEvent(document.body, "touchmove", (ev) => {
+		var trashSimEvent = {
+			origin: trash
+		};
+
+		if (mouseInsideElement(ev, trash)) {
+			handleDragOverInTrash(trashSimEvent);
+			isOverInTrash = true;
+		} else if (isOverInTrash) {
+			handleDragLeaveInTrash(trashSimEvent);
+			isOverInTrash = false;
+		}
+	});
+
+	setEvent(document.body, "touchend", (ev) => {
+		var trashSimEvent = {
+			preventDefault: () => ev.preventDefault(),
+			origin: trash,
+			target: trash
+		};
+
+		if (mouseInsideElement(ev, trash)) {
+			allowDrop(trashSimEvent);
+			isOverInTrash = true;
+		} else if (isOverInTrash) {
+			drop(trashSimEvent);
+			isOverInTrash = false;
+		}
+	});
+	//setEvent(trash, "touchenter", handleDragOverInTrash);
+
 	setEvent(trash, "dragenter", handleDragOverInTrash);
 	setEvent(trash, "dragleave", handleDragLeaveInTrash);
 	setEvent(trash, "drop", drop);
@@ -166,11 +191,13 @@ function updateBeforeOpenProject() {
 	document.title = document.getElementById("inputProjectName").value = project.name;
 	//project.set({ "usr": urlParams.get('usuario') || "Anonimo", "com": urlParams.get('curso') || "Sin Curso" });
 	diagramsMenu.clear();
+
 	if (project.hasDiagrams) {
 		project.publishTo(diagramsMenu.addDiagram);
 		first = project.getFirst();
 		diagramContainer.setDiagram(first);
 		diagramsMenu.setActiveDiagram(first);
+
 		handleInputs()
 		resizeInputs();
 		drawCorners();
@@ -182,16 +209,25 @@ function reSize() {
 	var footerHeight = parseFloat(window.getComputedStyle(document.getElementById("footer")).height);
 	var sectionDiagram = document.getElementById("sectionDiagram");
 	var menuContainer = document.getElementById("menuContainer");
+	var bodyHeight;
+	var newSectionDiagramHeight;
+	var paddingTopSection;
+	var paddingBottomSection;
+
 	document.body.style.paddingTop = headerHeight;
 	document.body.style.paddingBottom = footerHeight;
+
 	//var bodyHeight = parseFloat(window.getComputedStyle(document.body).height);
-	var bodyHeight = window.innerHeight;
-	var newSectionDiagramHeight = bodyHeight - headerHeight - footerHeight - 16;
+	bodyHeight = window.innerHeight;
+	newSectionDiagramHeight = bodyHeight - headerHeight - footerHeight - 16;
+
 	sectionDiagram.style.height = newSectionDiagramHeight;
 	menuContainer.style.height = newSectionDiagramHeight;
 	diagramsMenu.container.style.height = newSectionDiagramHeight;
-	var paddingTopSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingTop);
-	var paddingBottomSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingBottom);
+
+	paddingTopSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingTop);
+	paddingBottomSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingBottom);
+
 	this.diagramContainer.container.style.height = newSectionDiagramHeight - paddingTopSection - paddingBottomSection;
 }
 
@@ -202,8 +238,10 @@ function addDiagram(diagram) {
 
 function deleteDiagrams() {
 	var x = document.getElementById("diagramsItemsContainer").children;
+	var diagram;
+
 	for (y = x.length - 1; y >= 0; y--) {
-		var diagram = project.getDiagram(y);
+		diagram = project.getDiagram(y);
 		diagramContainer.setDiagram(diagram);
 		diagramsMenu.setActiveDiagram(diagram);
 		deleteDiagram(x[y]);
@@ -211,12 +249,17 @@ function deleteDiagrams() {
 }
 
 function deleteDiagram(diagramItemContainer) {
-	diagramsMenu.deleteDiagram(diagramItemContainer);
 	var id = diagramItemContainer.firstChild.id;
 	var indexOfRemovedDiagram = project.deleteDiagram(id.substring(id.indexOf("NSP")));
+	var idx;
+	var diagram;
+
+	diagramsMenu.deleteDiagram(diagramItemContainer);
+
 	if ("item-" + diagramContainer.actualDiagram.id == id) {
-		var idx = (indexOfRemovedDiagram == project.hasDiagrams ? indexOfRemovedDiagram - 1 : indexOfRemovedDiagram);
-		var diagram = project.getDiagram(idx);
+		idx = (indexOfRemovedDiagram == project.hasDiagrams ? indexOfRemovedDiagram - 1 : indexOfRemovedDiagram);
+		diagram = project.getDiagram(idx);
+
 		diagramContainer.setDiagram(diagram);
 		diagramsMenu.setActiveDiagram(diagram);
 	}
@@ -262,6 +305,19 @@ function handleChangeInput(e) {
 
 function handleChangeDiagramName(e) {
 	updateDiagram();
+}
+
+function loadCustomStyles() {
+	const savedCustomStyles = localStorage.getItem("customStyles");
+	const customStyles = document.getElementById("customStyles");
+	const newCustomStyles = document.getElementById("newCustomStyles");
+
+	if (typeof savedCustomStyles === "undefined" || savedCustomStyles == "") {
+		localStorage.setItem("customStyles", "/* Pon tu CSS aqui para personalizar la web */");
+	}
+
+	customStyles.href = "data:text/css;base64," + btoa(savedCustomStyles);
+	newCustomStyles.innerText = savedCustomStyles;
 }
 
 function prep() {
@@ -332,6 +388,7 @@ function ce(e) { clearAllChilds(document.body); alert(e); }
 function init() {
 	try {
 		prep();
+		loadCustomStyles();
 		//check();
 		document.getElementById("javascriptNeeded").classList.remove("invisible");
 		urlParams = new URLSearchParams(window.location.search);
