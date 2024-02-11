@@ -6,7 +6,7 @@ html {
 	z-index: 4;
 }
 
-#nppLogo {
+#nsppLogo {
 	width: 100%;
 	max-width: 112px;
 }
@@ -52,7 +52,7 @@ html {
 }
 
 #footer .message, .message {
-	font-family: "Dancing Script", Times New Roman, serif;
+	font-family: "Dancing Script", "Times New Roman", serif;
 	letter-spacing: 0.5pt;
 	font-size: 18px;
 }
@@ -68,6 +68,8 @@ html {
 #footer, #header {
 	display: flex;
 	align-items: center;
+}
+#footer {
 	z-index: 3;
 }
 

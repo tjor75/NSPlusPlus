@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="css/animations.css" />
 	<link rel="stylesheet" type="text/css" href="css/switch-button.css" />
 	<link rel="stylesheet" type="text/css" href="css/NSPColors.css" id="css/NSPColors.css" />
-	<link rel="stylesheet" type="text/css" href="css/NSPDarkMode.css" id="css/NSPDarkMode.css" />
+	<link rel="stylesheet" type="text/css" href="css/NSPDarkMode.css" />
 	<link rel="stylesheet" type="text/css" href="" id="customStyles" />
 </head>
 
@@ -25,7 +25,7 @@
 
 	<div id="javascriptNeeded" class="invisible">
 	<header id="header" class="w3-bar w3-indigo w3-top" style="display:inline-flex">
-		<img src="img/nsplus-logo-white.png" class="w3-image w3-bar-item" id="nppLogo" alt="NSPlusPlusLogo" title="NS Plus Plus" />
+		<img src="img/nsplus-logo-white.png" class="w3-image w3-bar-item" id="nsppLogo" alt="NSPlusPlusLogo" title="NS Plus Plus" />
 
 		<div>
 			<input id="inputProjectName" type="text" class="w3-bar-item w3-light-grey w3-input"
@@ -151,8 +151,7 @@
 	</div>
 
 	<footer id="footer" class="w3-indigo w3-bottom w3-row w3-padding-small">
-		<div class="professor w3-col s4 w3-center w3-cell w3-cell-middle">
-			<i class="fa fa-sm fa-github"></i>
+		<div class="professor w3-col s4 w3-left w3-cell w3-cell-middle">
 			<a href="http://www.github.com/axxonita">Prof. C. Daniel Vázquez</a>
 		</div>
 		<!--<div class="message w3-col s4 w3-center" id="historialBtn">Para todos.</div>-->
@@ -160,13 +159,13 @@
 			<i class="fa fa-sm fa-github"></i>
 			<a onclick="document.getElementById('id01').style.display='block'" href="#">Prof. Carlos E. Cimino</a>
 		</div>-->
-		<div class="w3-col s4 w3-right-align">
+		<!--<div class="w3-col s4 w3-right-align">
 			<a id="historialBtn" class="fa fa-book historial"
-				onclick="document.getElementById('id01').style.display='block'"></a>
+				onclick="document.getElementById('hist-popup').classList.remove('hidden')"></a>
 		</div>
 		<div id="hist-popup" class="w3-indigo hidden">
 			<iframe src="https://raw.githubusercontent.com/tjor75/NSPlusPlus/master/CHANGELOG" width="300px" height="500px"></iframe>
-		</div>
+		</div>-->
 	</footer>
 	</div>
 
@@ -205,7 +204,7 @@
 	<div id="projectPrint" class="w3-container invisible">
 		<div class="PDFHeader">
 			<!-- <img src="img/nsplus-logo-indigo.png" class="w3-image w3-bar-item" id="institutionLogoPDF" alt="NSPlusPlusLogo" title="NS Plus Plus" /> -->
-			<img src="img/nsplus-logo-indigo.png" class="w3-image w3-bar-item" id="nppLogoPDF" alt="NSPlusPlusLogo" title="NS Plus Plus" />
+			<img src="img/nsplus-logo-indigo.png" class="w3-image w3-bar-item" id="nsppLogoPDF" alt="NSPlusPlusLogo" title="NS Plus Plus" />
 			<h1 id="PDFTitle" class="w3-large w3-center"></h1>
 			<h2 id="PDFSubTitle" class="w3-small w3-center">
 				<span id="PDFAutor"></span> |
