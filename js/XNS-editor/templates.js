@@ -83,7 +83,7 @@ var templates = [
 			{
 				"type": "if",
 				"data": {
-					"condition": "condicion",
+					"condition": "condición",
 					"then": [],
 					"else": []
 				}
@@ -112,14 +112,14 @@ var templates = [
 		"items": [{
 			"type": "while",
 			"data": {
-				"condition": "condicion",
+				"condition": "condición",
 				"statements": []
 			}
 		},
 		{
 			"type": "dowhile",
 			"data": {
-				"condition": "condicion",
+				"condition": "condición",
 				"statements": []
 			}
 		},
@@ -152,7 +152,7 @@ var templates = [
 			{
 				"type": "call",
 				"data": {
-					"statement": "funcion(params)"
+					"statement": "función(params)"
 				}
 			},
 			{

@@ -86,6 +86,7 @@ function handleDragEnd(e) {
 
 function handleTouchStart(ev) {
 	//console.log(ev);
+	document.body.setAttribute("style", "background: yellow");
 	origin = findDraggableElement(ev.originalTarget);
 	console.log(isDraggable);
 }
@@ -177,6 +178,7 @@ function setTrashEvents() {
 	setEvent(document.body, "touchstart", handleTouchStart);
 
 	setEvent(document.body, "touchmove", (ev) => {
+		document.body.setAttribute("style", "background: red");
 		var trashSimEvent = { origin: origin, target: trash };
 		var clientX = ev.changedTouches[0].clientX;
 		var clientY = ev.changedTouches[0].clientY;
@@ -191,6 +193,7 @@ function setTrashEvents() {
 	});
 
 	setEvent(document.body, "touchend", (ev) => {
+		document.body.setAttribute("style", "background: green");
 		var trashSimEvent = {
 			preventDefault: () => ev.preventDefault(),
 			origin: origin,
