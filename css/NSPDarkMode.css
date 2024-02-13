@@ -1,4 +1,4 @@
-body.dark,
+.dark,
 .dark .w3-sidebar,
 .dark .for-statement .statements,
 .dark .while-statement>.container>.statements,
@@ -7,12 +7,9 @@ body.dark,
 }
 
 .dark .w3-white,
-.dark .w3-hover-white:hover {
-	background-color: #000 !important;
-}
-
+.dark .w3-hover-white:hover,
 .dark .w3-sidebar .w3-bar {
-	background-color: #000;
+	background-color: #000 !important;
 }
 
 .dark .w3-sidebar .w3-section {
@@ -20,8 +17,10 @@ body.dark,
 	background-color: #000;
 }
 
+.dark .diagram-item,
+.dark .w3-hover-white:hover,
 .dark .method-declaration .input-for-statement {
-	color: white;
+	color: #fff !important;
 }
 
 .dark .Nassi-Shneiderman {

@@ -7,9 +7,12 @@ var PDF;
 var urlParams;
 var trash = document.getElementById("trash");
 
+// Drag and drop variables
 var mode;
 var template;
 var id;
+var origin;
+var isDraggable;
 
 function drag(e) {
 	if (this.template)
@@ -81,6 +84,27 @@ function handleDragEnd(e) {
 	updateDiagram();
 }
 
+function handleTouchStart(ev) {
+	//console.log(ev);
+	origin = findDraggableElement(ev.originalTarget);
+	console.log(isDraggable);
+}
+
+function findDraggableElement(element) {
+	const bodyNodeName = "BODY";
+
+	isDraggable = false;
+
+	while(!isDraggable && element.parentElement.nodeName != bodyNodeName) {
+		isDraggable = element.hasAttribute("draggable") && element.draggable;
+		console.log(element);
+		console.log(isDraggable);
+		element = element.parentElement;
+	}
+
+	return element;
+}
+
 function collapseEmptys() {
 	var emptys = document.querySelectorAll("#actualDiagram .empty");
 	for (let e = 0; e < emptys.length; e++) {
@@ -150,15 +174,17 @@ function allowDrop(ev) {
 function setTrashEvents() {
 	var isOverInTrash = false;
 
-	setEvent(document.body, "touchmove", (ev) => {
-		var trashSimEvent = {
-			origin: trash
-		};
+	setEvent(document.body, "touchstart", handleTouchStart);
 
-		if (mouseInsideElement(ev, trash)) {
+	setEvent(document.body, "touchmove", (ev) => {
+		var trashSimEvent = { origin: origin, target: trash };
+		var clientX = ev.changedTouches[0].clientX;
+		var clientY = ev.changedTouches[0].clientY;
+
+		if (isDraggable && mouseInsideElement(trash, clientX, clientY)) {
 			handleDragOverInTrash(trashSimEvent);
 			isOverInTrash = true;
-		} else if (isOverInTrash) {
+		} else if (isDraggable && isOverInTrash) {
 			handleDragLeaveInTrash(trashSimEvent);
 			isOverInTrash = false;
 		}
@@ -167,14 +193,14 @@ function setTrashEvents() {
 	setEvent(document.body, "touchend", (ev) => {
 		var trashSimEvent = {
 			preventDefault: () => ev.preventDefault(),
-			origin: trash,
+			origin: origin,
 			target: trash
 		};
 
-		if (mouseInsideElement(ev, trash)) {
+		if (isDraggable && mouseInsideElement(trash, ev.clientX, ev.clientY)) {
 			allowDrop(trashSimEvent);
 			isOverInTrash = true;
-		} else if (isOverInTrash) {
+		} else if (isDraggable && isOverInTrash) {
 			drop(trashSimEvent);
 			isOverInTrash = false;
 		}
@@ -370,11 +396,11 @@ function drawCorners() {
 
 function setHPopup() {
 	new PopupHandler({
-		"popup": histPopup,
-		"button": historialBtn,
-		"open": function (elems) { project.fillHistorial(elems.popup) },
-		"close": function (elems) { if (elems.popup) elems.popup.innerHTML = "" },
-		"visible": false
+		popup: histPopup,
+		button: historialBtn,
+		open: function (elems) { project.fillHistorial(elems.popup) },
+		close: function (elems) { if (elems.popup) elems.popup.innerHTML = "" },
+		visible: false
 	})
 }
 

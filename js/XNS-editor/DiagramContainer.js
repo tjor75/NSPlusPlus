@@ -110,13 +110,19 @@ function DiagramContainer() {
 	this.setDiagramEvents = function () {
 		var isOverInBlock = false;
 
-		setEvent(document.body, "touchmove", (ev) => {
-			var containerSimEvent = { origin: this.container };
+		setEvent(document.body, "touchstart", handleTouchStart);
 
-			if (mouseInsideElement(ev, this.container)) {
+		setEvent(document.body, "touchmove", (ev) => {
+			var containerSimEvent = { origin: origin, target: this.container };
+			var clientX = ev.changedTouches[0].clientX;
+			var clientY = ev.changedTouches[0].clientY;
+
+			//console.log(isDraggable + " : " + mouseInsideElement(this.container, clientX, clientY));
+
+			if (isDraggable && mouseInsideElement(this.container, clientX, clientY)) {
 				handleDragOverInBlock(containerSimEvent);
 				isOverInBlock = true;
-			} else if (isOverInBlock) {
+			} else if (isDraggable && isOverInBlock) {
 				handleDragLeaveInBlock(containerSimEvent);
 				isOverInBlock = false;
 			}
@@ -125,14 +131,16 @@ function DiagramContainer() {
 		setEvent(document.body, "touchend", (ev) => {
 			var containerSimEvent = {
 				preventDefault: () => ev.preventDefault(),
-				origin: this.container,
+				origin: origin,
 				target: this.container
 			};
 
-			if (mouseInsideElement(ev, this.container)) {
+			console.log(ev);
+
+			if (isDraggable && mouseInsideElement(this.container, ev.clientX, ev.clientY)) {
 				allowDrop(containerSimEvent);
 				isOverInBlock = true;
-			} else if (isOverInBlock) {
+			} else if (isDraggable && isOverInBlock) {
 				drop(containerSimEvent);
 				isOverInBlock = false;
 			}

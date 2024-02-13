@@ -74,10 +74,14 @@ function insertAfter(newNode, referenceNode) {
 	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-function mouseInsideElement(ev, targetEl) {
-	var rect = targetEl.getBoundingClientRect();
-	return ev.clientX >= rect.left
-		&& ev.clientX <= rect.width + rect.left
-		&& ev.clientY >= rect.top
-		&& ev.clientY <= rect.height + rect.top;
+function mouseInsideElement(el, clientX, clientY) {
+	var rect = el.getBoundingClientRect();
+
+	/*console.log("cX: " + clientX + " tX: " + rect.left + " y " + (rect.width + rect.left));
+	console.log("cY: " + clientY + " tY: " + rect.top + " y " + (rect.height + rect.top));*/
+
+	return clientX >= rect.left
+		&& clientX <= rect.width + rect.left
+		&& clientY >= rect.top
+		&& clientY <= rect.height + rect.top;
 }
