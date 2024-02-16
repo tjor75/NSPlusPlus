@@ -41,13 +41,15 @@ function drop(ev) {
 			if (statement.getAttribute("type") == "switch")
 				diagramContainer.makeButtonAddInSwitch(statement);
 		} else {
-			statement = document.getElementById(id);
-			if (statement.className.includes("declaration")) {
-				deleteEmpty = false;
-				if (statement.className == "parameter-declaration" && !statement.innerHTML.includes(" , ") && diagramContainer.methodParameters.children.length > 1)
-					diagramContainer.methodParameters.children[1].innerHTML = diagramContainer.methodParameters.children[1].innerHTML.substring(" , ".length);
+			statement = findDroppableElement(document.getElementById(id));
+			if(isDraggable) {
+				if (statement.className.includes("declaration")) {
+					deleteEmpty = false;
+					if (statement.className == "parameter-declaration" && !statement.innerHTML.includes(" , ") && diagramContainer.methodParameters.children.length > 1)
+						diagramContainer.methodParameters.children[1].innerHTML = diagramContainer.methodParameters.children[1].innerHTML.substring(" , ".length);
+				}
+				empty = statement.nextSibling;
 			}
-			empty = statement.nextSibling;
 		}
 
 		if (ev.target == trash) {
@@ -85,25 +87,27 @@ function handleDragEnd(e) {
 }
 
 function handleTouchStart(ev) {
-	//console.log(ev);
-	document.body.setAttribute("style", "background: yellow");
-	origin = findDraggableElement(ev.originalTarget);
-	console.log(isDraggable);
+	origin = findDraggableElement(ev.target);
+	isDraggable = typeof origin !== "undefined";
 }
 
-function findDraggableElement(element) {
-	const bodyNodeName = "BODY";
+function findElementWithAttribute(currentElement, attribute) {
+	const BODY_NODE_NAME = "BODY";
+	var elementWithAttribute, hasAttribute = false;
 
-	isDraggable = false;
-
-	while(!isDraggable && element.parentElement.nodeName != bodyNodeName) {
-		isDraggable = element.hasAttribute("draggable") && element.draggable;
-		console.log(element);
-		console.log(isDraggable);
-		element = element.parentElement;
+	while(!hasAttribute && currentElement.parentElement.nodeName != BODY_NODE_NAME) {
+		hasAttribute = currentElement.hasAttribute(attribute) && currentElement[attribute];
+		currentElement = currentElement.parentElement;
 	}
 
-	return element;
+	if(hasAttribute) elementWithAttribute = currentElement;
+	return elementWithAttribute;
+}
+function findDraggableElement(element) {
+	return findElementWithAttribute(element, "draggable");
+}
+function findDroppableElement(element) {
+	return findElementWithAttribute(element, "droppable");
 }
 
 function collapseEmptys() {
@@ -178,7 +182,6 @@ function setTrashEvents() {
 	setEvent(document.body, "touchstart", handleTouchStart);
 
 	setEvent(document.body, "touchmove", (ev) => {
-		document.body.setAttribute("style", "background: red");
 		var trashSimEvent = { origin: origin, target: trash };
 		var clientX = ev.changedTouches[0].clientX;
 		var clientY = ev.changedTouches[0].clientY;
@@ -193,7 +196,6 @@ function setTrashEvents() {
 	});
 
 	setEvent(document.body, "touchend", (ev) => {
-		document.body.setAttribute("style", "background: green");
 		var trashSimEvent = {
 			preventDefault: () => ev.preventDefault(),
 			origin: origin,
@@ -235,7 +237,7 @@ function updateBeforeOpenProject() {
 
 function reSize() {
 	var headerHeight = parseFloat(window.getComputedStyle(document.getElementById("header")).height);
-	var footerHeight = parseFloat(window.getComputedStyle(document.getElementById("footer")).height);
+	//var footerHeight = parseFloat(window.getComputedStyle(document.getElementById("footer")).height);
 	var sectionDiagram = document.getElementById("sectionDiagram");
 	var menuContainer = document.getElementById("menuContainer");
 	var bodyHeight;
@@ -244,20 +246,22 @@ function reSize() {
 	var paddingBottomSection;
 
 	document.body.style.paddingTop = headerHeight;
-	document.body.style.paddingBottom = footerHeight;
+	//document.body.style.paddingBottom = footerHeight;
 
 	//var bodyHeight = parseFloat(window.getComputedStyle(document.body).height);
 	bodyHeight = window.innerHeight;
-	newSectionDiagramHeight = bodyHeight - headerHeight - footerHeight - 16;
+	//newSectionDiagramHeight = bodyHeight - headerHeight - footerHeight - 16;
+	newSectionDiagramHeight = bodyHeight - headerHeight - 16;
 
 	sectionDiagram.style.height = newSectionDiagramHeight;
 	menuContainer.style.height = newSectionDiagramHeight;
 	diagramsMenu.container.style.height = newSectionDiagramHeight;
 
 	paddingTopSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingTop);
-	paddingBottomSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingBottom);
+	//paddingBottomSection = parseFloat(window.getComputedStyle(sectionDiagram).paddingBottom);
 
-	this.diagramContainer.container.style.height = newSectionDiagramHeight - paddingTopSection - paddingBottomSection;
+	//this.diagramContainer.container.style.height = newSectionDiagramHeight - paddingTopSection - paddingBottomSection;
+	this.diagramContainer.container.style.height = newSectionDiagramHeight - paddingTopSection;
 }
 
 function addDiagram(diagram) {

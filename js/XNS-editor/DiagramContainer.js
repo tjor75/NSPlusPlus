@@ -113,37 +113,42 @@ function DiagramContainer() {
 		setEvent(document.body, "touchstart", handleTouchStart);
 
 		setEvent(document.body, "touchmove", (ev) => {
-			var containerSimEvent = { origin: origin, target: this.container };
 			var clientX = ev.changedTouches[0].clientX;
 			var clientY = ev.changedTouches[0].clientY;
-
-			//console.log(isDraggable + " : " + mouseInsideElement(this.container, clientX, clientY));
-
-			if (isDraggable && mouseInsideElement(this.container, clientX, clientY)) {
-				handleDragOverInBlock(containerSimEvent);
-				isOverInBlock = true;
-			} else if (isDraggable && isOverInBlock) {
-				handleDragLeaveInBlock(containerSimEvent);
-				isOverInBlock = false;
-			}
+			var containerSimEvent = { origin: origin };
+			
+			doWhenIsOnDroppable(this.container, clientX, clientY, (droppable) => {
+					containerSimEvent.target = droppable;
+				
+					if (mouseInsideElement(containerSimEvent.target, clientX, clientY)) {
+						handleDragOverInBlock(containerSimEvent);
+						isOverInBlock = true;
+					} else if (isOverInBlock) {
+						handleDragLeaveInBlock(containerSimEvent);
+						isOverInBlock = false;
+					}
+				});
 		});
 
 		setEvent(document.body, "touchend", (ev) => {
 			var containerSimEvent = {
 				preventDefault: () => ev.preventDefault(),
 				origin: origin,
-				target: this.container
 			};
 
 			console.log(ev);
 
-			if (isDraggable && mouseInsideElement(this.container, ev.clientX, ev.clientY)) {
-				allowDrop(containerSimEvent);
-				isOverInBlock = true;
-			} else if (isDraggable && isOverInBlock) {
-				drop(containerSimEvent);
-				isOverInBlock = false;
-			}
+			doWhenIsOnDroppable(this.container, ev.clientX, ev.clientY, (droppable) => {
+				containerSimEvent.target = droppable;
+				
+				if (mouseInsideElement(containerSimEvent.target, clientX, clientY)) {
+					allowDrop(containerSimEvent);
+					isOverInBlock = true;
+				} else if (isOverInBlock) {
+					drop(containerSimEvent);
+					isOverInBlock = false;
+				}
+			});
 		});
 		//setEvent(this.container, "touchenter", handleDragOverInBlock);
 

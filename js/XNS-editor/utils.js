@@ -77,11 +77,20 @@ function insertAfter(newNode, referenceNode) {
 function mouseInsideElement(el, clientX, clientY) {
 	var rect = el.getBoundingClientRect();
 
-	/*console.log("cX: " + clientX + " tX: " + rect.left + " y " + (rect.width + rect.left));
-	console.log("cY: " + clientY + " tY: " + rect.top + " y " + (rect.height + rect.top));*/
-
 	return clientX >= rect.left
 		&& clientX <= rect.width + rect.left
 		&& clientY >= rect.top
 		&& clientY <= rect.height + rect.top;
+}
+
+function doWhenIsOnDroppable(mainElement, clientX, clientY, action) {
+	var droppables = mainElement.querySelectorAll("[droppable]");
+	var i = droppables.length - 1;
+
+	if (isDraggable) {
+		while (i > 0 && droppables[i] != mouseInsideElement(droppables[i], clientX, clientY)) {
+			action(droppables[i]);
+			i--;
+		}
+	}
 }
