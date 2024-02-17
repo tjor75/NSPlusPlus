@@ -85,12 +85,15 @@ function mouseInsideElement(el, clientX, clientY) {
 
 function doWhenIsOnDroppable(mainElement, clientX, clientY, action) {
 	var droppables = mainElement.querySelectorAll("[droppable]");
-	var i = droppables.length - 1;
+	var i = droppables.length;
+	var notServed = true;
 
-	if (isDraggable) {
-		while (i > 0 && droppables[i] != mouseInsideElement(droppables[i], clientX, clientY)) {
-			action(droppables[i]);
+	if (isDraggable)
+		while (i > 0 && notServed) {
 			i--;
+			if (mouseInsideElement(droppables[i], clientX, clientY)) {
+				action(droppables[i]);
+				notServed = false;
+			}
 		}
-	}
 }

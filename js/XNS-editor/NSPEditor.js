@@ -41,7 +41,7 @@ function drop(ev) {
 			if (statement.getAttribute("type") == "switch")
 				diagramContainer.makeButtonAddInSwitch(statement);
 		} else {
-			statement = findDroppableElement(document.getElementById(id));
+			statement = document.getElementById(id);
 			if(isDraggable) {
 				if (statement.className.includes("declaration")) {
 					deleteEmpty = false;
